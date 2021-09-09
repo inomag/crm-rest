@@ -1,11 +1,10 @@
-package com.boot.rest.demo.dao;
+package com.boot.rest.demo.service;
 
 import com.boot.rest.demo.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeDAO {
-
+public interface EmployeeService {
     public List<Employee> findAll();
 
     public Employee findOne(int id);

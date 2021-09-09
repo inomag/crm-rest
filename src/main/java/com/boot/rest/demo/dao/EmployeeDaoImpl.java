@@ -21,7 +21,6 @@ public class EmployeeDaoImpl implements EmployeeDAO{
     }
 
     @Override
-    @Transactional
     public List<Employee> findAll() {
         // GET HIBERNATE SESSION
         Session session = entityManager.unwrap(Session.class);
@@ -34,5 +33,26 @@ public class EmployeeDaoImpl implements EmployeeDAO{
         //RETURN LIST
 
         return employees;
+    }
+
+    @Override
+    public Employee findOne(int id) {
+        Session session = entityManager.unwrap(Session.class);
+        Employee employee = (Employee)session.get(Employee.class,id);
+        return employee;
+    }
+
+    @Override
+    public void save(Employee employee) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(employee);
+    }
+
+    @Override
+    public void delete(int id) {
+        Session session = entityManager.unwrap(Session.class);
+        Query query = session.createQuery("DELETE FROM Employee WHERE id=:id");
+        query.setParameter("id",id);
+        query.executeUpdate();
     }
 }
